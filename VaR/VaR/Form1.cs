@@ -113,7 +113,7 @@ namespace VaR
             {
                 for (int i = 0; i < nyereségekRendezve.Count(); i++)
                     {
-                    sw.WriteLine(string.Format({ "0"; "1" },i,nyereségekRendezve[i]))
+                    sw.WriteLine(string.Format({ "0"; "1" },i,nyereségekRendezve[i]));
                     
 
                     }
