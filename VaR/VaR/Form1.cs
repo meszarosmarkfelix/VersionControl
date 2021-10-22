@@ -26,6 +26,32 @@ namespace VaR
             dataGridView1.DataSource = Ticks;
 
             CreatePortfolio();
+
+            int elemszám = Portfolio.Count();
+
+            decimal részvényekSzáma = (from x in Portfolio select x.Volume).Sum();
+            MessageBox.Show(string.Format("Részvények száma: {0}", részvényekSzáma));
+
+            DateTime minDátum = (from x in Ticks select x.TradingDay).Min();
+            DateTime maxDátum = (from x in Ticks select x.TradingDay).Max();
+            int elteltNapokSzáma = (maxDátum - minDátum).Days;
+
+            DateTime optMinDátum = (from x in Ticks where x.Index == "OTP" select x.TradingDay).Min();
+
+            var kapcsolt = 
+            from x in Ticks
+            join
+            y in Portfolio
+            on x.Index equals y.Index
+            select new
+            {
+                Index = x.Index,
+                Date = x.TradingDay,
+                Value = x.Price,
+                Volume = y.Volume
+            };
+            dataGridView1.DataSource = kapcsolt.ToList();
+
         }
 
         private void CreatePortfolio()
