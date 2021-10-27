@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SOAP.Entities;
 using SOAP.MnbServiceReference;
 
 namespace SOAP
@@ -17,6 +18,8 @@ namespace SOAP
         {
             InitializeComponent();
             GetExchangeRates();
+            BindingList<RateData> Rates = new BindingList<RateData>();
+            dataGridView1.DataSource = Rates;
         }
 
         private void GetExchangeRates()
