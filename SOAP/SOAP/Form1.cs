@@ -16,6 +16,7 @@ namespace SOAP
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +25,13 @@ namespace SOAP
             dataGridView2.DataSource = Rates;
             GetXML();
             GetChart();
+            RefreshData();
+
+        }
+
+        private void RefreshData()
+        {
+            Rates.Clear();
         }
 
         private void GetChart()
@@ -73,9 +81,9 @@ namespace SOAP
 
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = dateTimePicker1.ToString(),
+                endDate = dateTimePicker2.ToString()
 
 
             };
@@ -87,6 +95,19 @@ namespace SOAP
 
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }
