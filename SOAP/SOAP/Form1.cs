@@ -16,17 +16,30 @@ namespace SOAP
 {
     public partial class Form1 : Form
     {
-        
+        BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
+
         public Form1()
         {
             InitializeComponent();
             GetExchangeRates();
-            BindingList<RateData> Rates = new BindingList<RateData>();
             dataGridView2.DataSource = Rates;
+            GetCurrencies();
             GetXML();
             GetChart();
             RefreshData();
 
+        }
+
+        private void GetCurrencies()
+        {
+            var mnbCurrency = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetExchangeRatesRequestBody()
+            
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
         }
 
         private void RefreshData()
@@ -108,6 +121,7 @@ namespace SOAP
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshData();
+            comboBox1.DataSource = Currencies;
         }
     }
 }
