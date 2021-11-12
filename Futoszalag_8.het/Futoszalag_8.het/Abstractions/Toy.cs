@@ -23,7 +23,7 @@ namespace Futoszalag_8.het.Abstractions
             DrawImage(e.Graphics);
         }
 
-        protected abstract void DrawImage(Graphics g)
+        protected abstract void DrawImage(Graphics g);
 
 
 
