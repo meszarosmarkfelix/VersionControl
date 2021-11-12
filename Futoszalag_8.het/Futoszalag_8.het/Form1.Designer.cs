@@ -47,10 +47,12 @@ namespace Futoszalag_8.het
             // 
             // createTimer
             // 
+            this.createTimer.Enabled = true;
             this.createTimer.Tick += new System.EventHandler(this.createTimer_Tick);
             // 
             // conveyorTimer
             // 
+            this.conveyorTimer.Enabled = true;
             this.conveyorTimer.Tick += new System.EventHandler(this.conveyorTimer_Tick);
             // 
             // Form1
