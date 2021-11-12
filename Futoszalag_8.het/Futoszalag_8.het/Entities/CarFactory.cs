@@ -7,12 +7,11 @@ using Futoszalag_8.het.Abstractions;
 
 namespace Futoszalag_8.het.Entities
 {
-    public class BallFactory: IToyFactory
+    public class CarFactory : IToyFactory
     {
-        public Toy CreateNew() 
+        public Toy CreateNew()
         {
             return new Ball();
-
         }
     }
 }
