@@ -103,5 +103,15 @@ namespace Futoszalag_8.het
                 return;
             button.BackColor = colorPicker.Color;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                Color1 = button4.BackColor,
+                Color2 = button4.BackColor
+
+            };
+        }
     }
 }
