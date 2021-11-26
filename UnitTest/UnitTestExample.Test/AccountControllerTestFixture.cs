@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using NUnit.Framework;
+using UnitTestExample.Abstractions;
 using UnitTestExample.Controllers;
+using UnitTestExample.Entities;
 
 namespace UnitTestExample.Test
 {
@@ -61,16 +64,21 @@ namespace UnitTestExample.Test
         public void TestRegisterHappyPath(string email, string password)
         {
             // Arrange
+            var accountManagerMock = new Mock <IAccountManager>(MockBehavior.Strict);
+            accountManagerMock
+                .Setup(m.CreateAccount(It.IsAny<Account>()))
+                .Returns.<Account> (a => a);
             var accountController = new AccountController();
-
+            accountController.AccountManager = accountServiceMock.Object;
             // Act
             var result = accountController.Register(email, password);
+            accountController.AccountManager.Accounts.Contains(result);
 
             // Assert
             Assert.AreEqual(email, result.Email);
             Assert.AreEqual(password, result.Password);
             Assert.AreNotEqual(Guid.Empty, result.ID);
-
+            accountServiceMock.Verify(m => m.CreateAccount(actualResult), Times.Once);
 
 
         }
